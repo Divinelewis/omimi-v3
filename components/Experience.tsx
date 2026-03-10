@@ -1,4 +1,5 @@
 import useInView from "../hooks/useInView";
+import { ExternalLink } from "lucide-react";
 
 interface Project {
   id: number;
@@ -353,7 +354,7 @@ export default function Experience() {
                   </div>
 
                   <a href={p.link} target="_blank" rel="noopener noreferrer">
-                    ↗
+                    <ExternalLink size={18} color="#f03c27" />
                   </a>
                 </div>
 
