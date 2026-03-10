@@ -12,6 +12,7 @@ export default function Hero() {
       ? { animation: `fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) ${delay}s both` }
       : { opacity: 0 };
 
+  // Prevent right click / long press / drag on the image
   const preventDefault = (e: React.SyntheticEvent) => {
     e.preventDefault();
   };
@@ -27,6 +28,30 @@ export default function Hero() {
           position: relative;
           overflow: hidden;
         }
+        /* subtle grid texture */
+        .hero::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(var(--border) 1px, transparent 1px),
+            linear-gradient(90deg, var(--border) 1px, transparent 1px);
+          background-size: 64px 64px;
+          opacity: 0.15;
+          pointer-events: none;
+        }
+        /* red vignette on right */
+        .hero::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            ellipse 65% 100% at 85% 60%,
+            var(--red-glow) 0%,
+            transparent 65%
+          );
+          pointer-events: none;
+        }
 
         /* ── LEFT ── */
         .left {
@@ -37,7 +62,6 @@ export default function Hero() {
           position: relative;
           z-index: 2;
         }
-
         .tag {
           display: inline-flex;
           align-items: center;
@@ -169,7 +193,26 @@ export default function Hero() {
           display: flex;
           align-items: flex-end;
         }
-
+        .right::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 30%;
+          background: linear-gradient(to right, var(--bg), transparent);
+          z-index: 3;
+        }
+        .right::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 35%;
+          background: linear-gradient(to top, var(--bg), transparent);
+          z-index: 3;
+        }
         .pfp {
           position: absolute;
           inset: 0;
@@ -178,24 +221,10 @@ export default function Hero() {
           object-fit: cover;
           object-position: center top;
           animation: heroImg 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
-          -webkit-user-drag: none;
-          user-select: none;
-          pointer-events: none;
+          -webkit-user-drag: none; /* disable drag in Safari */
+          user-select: none; /* disable text selection */
+          pointer-events: none; /* disable clicks */
         }
-
-        /* ── GRID LINES ON TOP ── */
-        .hero-lines {
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(var(--border) 1px, transparent 1px),
-            linear-gradient(90deg, var(--border) 1px, transparent 1px);
-          background-size: 64px 64px;
-          opacity: 0.15;
-          z-index: 5; /* above pfp image */
-          pointer-events: none;
-        }
-
         .glow {
           position: absolute;
           bottom: 0;
@@ -212,7 +241,6 @@ export default function Hero() {
           z-index: 1;
           pointer-events: none;
         }
-
         .badge {
           position: absolute;
           bottom: 36px;
@@ -235,6 +263,7 @@ export default function Hero() {
           margin-top: 6px;
         }
 
+        /* scroll cue */
         .scroll-cue {
           position: absolute;
           bottom: 32px;
@@ -346,13 +375,10 @@ export default function Hero() {
             src="/pfp.jpg"
             alt="Omimi"
             draggable={false}
-            onContextMenu={preventDefault}
-            onDragStart={preventDefault}
-            onTouchStart={preventDefault}
+            onContextMenu={preventDefault} // prevent right-click
+            onDragStart={preventDefault} // prevent drag
+            onTouchStart={preventDefault} // prevent long press on mobile
           />
-          {/* NEW: Grid lines on top of image */}
-          <div className="hero-lines" />
-
           <div className="badge">
             <div className="badge-text">Est. 2021</div>
             <div className="badge-bar" />
