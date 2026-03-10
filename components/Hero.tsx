@@ -316,7 +316,7 @@ export default function Hero() {
             I turn{" "}
             <strong>complex narratives into sharp, compelling content</strong>{" "}
             that moves communities, drives protocol growth, and converts readers
-            into believers. Three years embedded in the space.
+            into believers. Two years embedded in the space.
           </p>
 
           <div className="socials" style={s(0.8)}>
@@ -346,15 +346,15 @@ export default function Hero() {
 
           <div className="stats" style={s(0.95)}>
             <div className="stat">
-              <div className="stat-n">30+</div>
+              <div className="stat-n">100+</div>
               <div className="stat-l">Articles</div>
             </div>
             <div className="stat">
-              <div className="stat-n">15+</div>
+              <div className="stat-n">30+</div>
               <div className="stat-l">Clients</div>
             </div>
             <div className="stat">
-              <div className="stat-n">3yr</div>
+              <div className="stat-n">2yr+</div>
               <div className="stat-l">Experience</div>
             </div>
           </div>
